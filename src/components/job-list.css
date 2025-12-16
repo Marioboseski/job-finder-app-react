@@ -1,0 +1,53 @@
+.job-card {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.job-card button {
+  width: 100%;
+  max-width: 210px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: rgb(204, 201, 201);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+}
+
+.job-card button:hover {
+  background-color: rgb(151, 149, 149);
+}
+
+.job-title {
+  font-weight: bold;
+}
+
+.job-company {
+  color: #555;
+}
+
+.job-location {
+  color: #777;
+}
+
+.job-salary {
+  font-weight: bold;
+  text-align: right;
+}
+
+.toast-notification {
+  opacity: 0;
+  font-size: 1rem;
+  color: black;
+  transition: opacity 0.3s ease;
+}
+
+.toast-notification.show {
+  opacity: 1;
+}
+
