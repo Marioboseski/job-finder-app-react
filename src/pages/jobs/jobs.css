@@ -1,0 +1,27 @@
+.jobs-layout {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sidebar {
+  border-right: 1px solid #ddd;
+  padding: 1.5rem;
+}
+
+.jobs-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.filters-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
