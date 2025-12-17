@@ -1,0 +1,68 @@
+.home-section {
+  padding: 1.5rem;
+  background-color: rgb(238, 231, 231);
+}
+
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.home-content h1 {
+  font-size: 3rem;
+}
+
+.home-content .sub-heading {
+  font-size: 1.5rem;
+  color: grey;
+}
+
+.home-content button {
+  color: black;
+  background-color: rgba(157, 152, 152, 0.123);
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: 100%;
+  max-width: 200px;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;  
+}
+
+.home-content button:hover {
+  background-color: gray;
+}
+
+.home-content img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.home-content .user-trust-paragraph {
+  font-size: 2rem;
+}
+
+.users-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.users-logos img {
+  width: 100%;
+  max-width: 150px;
+}
