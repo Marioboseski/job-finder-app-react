@@ -25,3 +25,12 @@
   padding: 1rem;
 }
 
+@media (max-width: 768px) {
+  .filters-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
