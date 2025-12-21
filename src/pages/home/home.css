@@ -1,6 +1,13 @@
 .home-section {
   padding: 1.5rem;
   background-color: rgb(238, 231, 231);
+  min-height: 100dvh;
+}
+
+.home-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-wrapper {
@@ -65,4 +72,20 @@
 .users-logos img {
   width: 100%;
   max-width: 150px;
+}
+
+@media (max-width: 768px) {
+
+  .home-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .users-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }
