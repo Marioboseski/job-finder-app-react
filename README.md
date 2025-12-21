@@ -22,6 +22,7 @@ A modern Job Finder web application built with React that allows to browse jobs,
 
 # Live Demo 
 
+https://marioboseski.github.io/job-finder-app-react/
 
 # Technologies used 
 
