@@ -1,10 +1,11 @@
-import Navbar from "../../components/navbar/Navbar";
 import { useState, useEffect } from "react";
+import Navbar from "../../components/navbar/Navbar";
 import LocationFilter from "../../components/filters/LocationFilter";
 import CompanyFilter from "../../components/filters/CompanyFilter";
 import SalaryFilter from "../../components/filters/SalaryFilter";
 import JobTitleFilter from "../../components/filters/JobTitleFilter";
 import JobList from "../../components/JobList";
+import mockJobs from "../../../backend/mockData";
 import "./jobs.css";
 
 const Jobs = () => {
@@ -18,28 +19,25 @@ const Jobs = () => {
   const [selectedTitle, setSelectedTitle] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // ✅ CORRECT useEffect
   useEffect(() => {
-    const fetchInformations = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/jobs");
-        const data = await response.json();
+    try {
+      setJobs(mockJobs);
 
-        setJobs(data);
+      const uniqueLocations = [
+        ...new Set(mockJobs.map(job => job.location))
+      ];
+      setLocations(uniqueLocations);
 
-        const uniqueLocations = [...new Set(data.map(job => job.location))];
-        setLocations(uniqueLocations);
-
-        const uniqueCompanies = [...new Set(data.map(job => job.company))];
-        setCompanies(uniqueCompanies);
-
-      } catch (error) {
-        console.log("API error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchInformations();
+      const uniqueCompanies = [
+        ...new Set(mockJobs.map(job => job.company))
+      ];
+      setCompanies(uniqueCompanies);
+    } catch (error) {
+      console.error("Jobs loading error:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const filteredJobs = jobs.filter(job => {
@@ -52,7 +50,9 @@ const Jobs = () => {
     return (
       (selectedLocation ? job.location === selectedLocation : true) &&
       (selectedCompany ? job.company === selectedCompany : true) &&
-      (selectedTitle ? job.title.toLowerCase().includes(selectedTitle.toLowerCase()) : true) &&
+      (selectedTitle
+        ? job.title.toLowerCase().includes(selectedTitle.toLowerCase())
+        : true) &&
       salaryMatch
     );
   });
@@ -70,7 +70,6 @@ const Jobs = () => {
 
   return (
     <div className="jobs-layout">
-
       <aside className="sidebar">
         <Navbar />
       </aside>
@@ -78,34 +77,45 @@ const Jobs = () => {
       <div className="container">
         <main className="jobs-content">
           <div className="filters-content">
-            <LocationFilter locations={locations} onChange={setSelectedLocation} />
-            <CompanyFilter companies={companies} onChange={setSelectedCompany} />
+            <LocationFilter
+              locations={locations}
+              onChange={setSelectedLocation}
+            />
+            <CompanyFilter
+              companies={companies}
+              onChange={setSelectedCompany}
+            />
             <SalaryFilter onChange={setSelectedSalary} />
             <JobTitleFilter onChange={setSelectedTitle} />
           </div>
 
-          <div className="jobs-list">
-            <JobList jobs={filteredJobs} onBookmark={handleBookmark} />
-          </div>
-
-          {loading && (
+          {loading ? (
             <p>Loading jobs...</p>
+          ) : (
+            <div className="jobs-list">
+              <JobList
+                jobs={filteredJobs}
+                onBookmark={handleBookmark}
+              />
+            </div>
           )}
         </main>
       </div>
-
     </div>
   );
 };
 
 export default Jobs;
 
+// ================= HELPER =================
 function salaryRangeMatch(salary, rangeString) {
+  if (!rangeString) return true;
+
   if (rangeString.includes("+")) {
     const min = parseInt(rangeString);
     return salary >= min;
   }
 
-  const [min, max] = rangeString.split("-").map(n => parseInt(n));
+  const [min, max] = rangeString.split("-").map(Number);
   return salary >= min && salary <= max;
 }
